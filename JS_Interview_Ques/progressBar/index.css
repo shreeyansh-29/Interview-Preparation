@@ -1,0 +1,9 @@
+.progressBar {
+    height: 10px;
+    width: 0;
+    background: red;
+    margin: 10px 0;
+  }
+  .fullWidth {
+    width: 100%;
+  }

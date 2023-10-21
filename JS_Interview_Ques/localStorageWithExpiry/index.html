@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      window.localStorageWithExpiry = {
+        setItem: function (key, value, expiry) {
+          let result = {
+            value,
+            expiry: Date.now() + expiry,
+          };
+          localStorage.setItem(key, JSON.stringify(result));
+        },
+        getItem: function (key) {
+          let val = localStorage.getItem(key);
+          val = JSON.parse(val);
+          if (val.expiry <= Date.now()) {
+            localStorage.removeItem(key);
+            return null;
+          }
+          return val.value;
+        },
+      };
+
+      localStorageWithExpiry.setItem("abc", "pqr", 2000);
+
+      setTimeout(() => {
+        console.log(localStorageWithExpiry.getItem("abc"));
+      }, 1500);
+
+      setTimeout(() => {
+        console.log(localStorageWithExpiry.getItem("abc"));
+      }, 5000);
+    </script>
+    <!-- <script src="index.js"></script> -->
+  </body>
+</html>

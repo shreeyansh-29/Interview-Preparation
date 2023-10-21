@@ -1,0 +1,25 @@
+<script>
+  const sum = (...args) => {
+    console.log(args);
+    let storage = args;
+
+    const helper = (...args2) => {
+      storage.push(...args2);
+      return helper;
+    };
+
+    helper.valueOf = function () {
+      return storage.reduce((a, b) => a + b, 0);
+    };
+
+    helper.value = helper.valueOf;
+    this.value = helper.valueOf;
+
+    return helper;
+  };
+
+  console.log(sum(1, 2, 3).value() === 6);
+  console.log(sum((1, 3), 3).value() === 6);
+  console.log(sum(1)(2)(3).value() === 6);
+  console.log(sum(1)(2) + 3);
+</script>

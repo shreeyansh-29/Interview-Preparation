@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="id">Click Me</button>
+    <script>
+      const onClick = () => console.log("clicked");
+
+      //Count Based Throttle
+      //   const throttle = (fn, count) => {
+      //     let counter = 0;
+      //     return function (...args) {
+      //       if (++counter !== count) return;
+      //       counter = 0;
+      //       fn.apply(this, args);
+      //     };
+      //   };
+
+      // Time Based Throttle 1 Approach
+      //   const throttle = (fn, delay) => {
+      //     let flag = true;
+      //     return function (...args) {
+      //       let context = this,
+      //         params = arguments;
+      //       if (flag) {
+      //         fn.apply(context, params);
+      //         flag = false;
+      //         setTimeout(() => (flag = true), delay);
+      //       }
+      //     };
+      //   };
+
+      //   Time Based Throttle 2 Approach
+      //   const throttle = (func, limit) => {
+      //   let lastFunc;
+      //   let lastRan;
+      //   return function() {
+      //     const context = this;
+      //     const args = arguments;
+      //     if (!lastRan) {
+      //       func.apply(context, args);
+      //       lastRan = Date.now();
+      //     } else {
+      //       clearTimeout(lastFunc);
+      //       lastFunc = setTimeout(function() {
+      //         if ((Date.now() - lastRan) >= limit) {
+      //           func.apply(context, args)
+      //           lastRan = Date.now()
+      //         }
+      //       }, limit - (Date.now() - lastRan));
+      //     }
+      //   }
+      // }
+      //Throttle using options
+      const throttle = (fn, wait, option = {leading: true, trailing: true}) => {
+        let timerId;
+        let lastArgs;
+
+        return function (...args) {
+          const {trailing, leading} = option;
+          const waitFunc = () => {
+            if (trailing && lastArgs) {
+              fn.apply(this, lastArgs);
+              lastArgs = null;
+              timerId = setTimeout(waitFunc, wait);
+            } else {
+              // else reset the timer
+              timerId = null;
+            }
+          };
+
+          // if leading run it right away
+          if (!timerId && leading) {
+            fn.apply(this, args);
+          }
+          // else store the args
+          else {
+            lastArgs = args;
+          }
+
+          // run the delayed call
+          if (!timerId) {
+            timerId = setTimeout(waitFunc, wait);
+          }
+        };
+      };
+
+      const throttleEvent = throttle(onClick, 2000);
+
+      document.getElementById("id").addEventListener("click", throttleEvent);
+    </script>
+  </body>
+</html>

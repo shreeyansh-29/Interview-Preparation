@@ -1,0 +1,17 @@
+.main {
+  width: 500px;
+  margin: 10px auto 0 auto;
+}
+
+#suggestion-area {
+  border: 1px solid red;
+  margin-top: 10px;
+  min-height: 100px;
+  padding: 5px;
+  display: none;
+}
+
+#search {
+  padding: 10px;
+  width: 100%;
+}

@@ -1,0 +1,51 @@
+<script>
+  //using freeze() won't allow any updation or addons
+  function deepFreeze(obj) {
+    for (let key in obj) {
+      const val = obj[key];
+      if (typeof val === "object") {
+        deepFreeze(val);
+      }
+    }
+
+    return Object.freeze(obj);
+  }
+
+  const obj1 = {
+    a: 10,
+    b: {
+      c: 20,
+    },
+  };
+
+  deepFreeze(obj1);
+
+  obj1.a = 20;
+
+  console.log(obj1);
+
+  //using seal allows only updations till one level not addons
+  function deepSeal(obj) {
+    for (let key in obj) {
+      const val = obj[key];
+      if (typeof val === "object") {
+        deepSeal(val);
+      }
+    }
+
+    return Object.seal(obj);
+  }
+
+  const obj = {
+    a: 10,
+    b: {
+      c: 20,
+    },
+  };
+
+  deepSeal(obj);
+
+  obj.a = 20;
+
+  console.log(obj);
+</script>

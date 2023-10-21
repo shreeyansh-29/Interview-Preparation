@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid #000;
+}
+
+input {
+  width: 100%;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid green;
+}
+
+.close {
+  opacity: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.item:hover .close {
+  opacity: 1;
+}
+
+.strike {
+  text-decoration: line-through;
+}

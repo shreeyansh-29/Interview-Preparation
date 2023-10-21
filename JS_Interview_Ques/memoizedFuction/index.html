@@ -1,0 +1,22 @@
+<script>
+  function Memoization() {
+    let cache = {};
+
+    return function (num) {
+      if (num in cache) {
+        // console.log(cache[num]);
+        return cache[num];
+      } else {
+        let a = 256 + num;
+        cache[num] = a;
+        return cache[num];
+      }
+    };
+  }
+
+  let helper = Memoization();
+
+  console.log(helper(20));
+  console.log(helper(25));
+  console.log(helper(20));
+</script>

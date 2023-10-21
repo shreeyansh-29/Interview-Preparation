@@ -1,0 +1,54 @@
+<script>
+  const useCustomCookie = () => {
+    const store = new Map();
+    // Object.defineProperty() allows a precise addition to or modification of a property on an object
+    Object.defineProperty(document, "myCookie", {
+      configurable: true,
+      set(val) {
+        const {key, value, options} = parseCookieString(val);
+        let expiry = Infinity;
+
+        if (options["max-age"]) {
+          expiry = Date.now() + options["max-age"] * 1000;
+        }
+
+        store.set(key, {value, expiry});
+      },
+      get() {
+        const time = Date.now();
+        const cookies = [];
+        for (let [key, {value, expiry}] of store) {
+          if (expiry <= time) {
+            store.delete(key);
+          } else {
+            cookies.push(`${key}=${value}`);
+          }
+        }
+        return cookies.join("; ");
+      },
+    });
+    const parseCookieString = (str) => {
+      const [nameValue, ...rest] = str.split(";");
+      const [key, value] = seperateKeyValue(nameValue);
+      const options = {};
+      for (let option of rest) {
+        const [key, value] = seperateKeyValue(option);
+        options[key] = value;
+      }
+      return {key, value, options};
+    };
+    const seperateKeyValue = (str) => {
+      return str.split("=").map((s) => s.trim());
+    };
+  };
+
+  useCustomCookie();
+  document.cookie = "myName=Shreeyansh; max-age=1";
+  document.cookie = "techStack=React";
+
+  console.log(document.cookie);
+
+  setTimeout(() => {
+    console.log(document.cookie);
+  }, 1500);
+</script>

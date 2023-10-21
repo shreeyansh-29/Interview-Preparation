@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        display: flex;
+        flex-direction: row;
+        /* align-items: center; */
+        /* justify-content: center; */
+        flex-wrap: wrap;
+      }
+
+      .blocks {
+        background: red;
+        width: 374px;
+        height: 75px;
+        top: 13px;
+        right: 387px;
+        bottom: 88px;
+        left: 13px;
+        text-align: center;
+        margin: 10px 10px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="blocks">1</div>
+      <div class="blocks">2</div>
+      <div class="blocks">3</div>
+      <div class="blocks">4</div>
+      <div class="blocks">5</div>
+      <div class="blocks">6</div>
+      <div class="blocks">7</div>
+      <div class="blocks">8</div>
+      <div class="blocks">9</div>
+      <div class="blocks">10</div>
+      <div class="blocks">11</div>
+      <div class="blocks">12</div>
+      <div class="blocks">13</div>
+      <div class="blocks">14</div>
+      <div class="blocks">15</div>
+      <div class="blocks">16</div>
+      <div class="blocks">17</div>
+      <div class="blocks">18</div>
+      <div class="blocks">19</div>
+      <div class="blocks">20</div>
+      <div class="blocks">21</div>
+      <div class="blocks">22</div>
+      <div class="blocks">23</div>
+      <div class="blocks">24</div>
+      <div class="blocks">25</div>
+      <div class="blocks">26</div>
+      <div class="blocks">27</div>
+    </div>
+
+    <script>
+      const inViewPort = (elm) => {
+        let eleDim = elm.getBoundingClientRect();
+        let viewHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        let viewWidth =
+          window.innerWidth || document.documentElement.clientWidth;
+
+        return (
+          eleDim.top >= 0 &&
+          eleDim.left >= 0 &&
+          eleDim.bottom <= viewHeight &&
+          eleDim.right <= viewWidth
+        );
+      };
+
+      const detect = () => {
+        const result = [];
+
+        const blocks = document.querySelectorAll(".blocks");
+
+        blocks.forEach((e) => {
+          if (inViewPort(e)) {
+            result.push(e.textContent);
+          }
+        });
+        console.log(result);
+      };
+
+      const debounce = (fn, d) => {
+        let timer;
+        return function (args) {
+          let context = this;
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(context, args);
+          }, d);
+        };
+      };
+
+      const debounceDetect = debounce(detect, 1000);
+
+      window.addEventListener("scroll", debounceDetect);
+    </script>
+  </body>
+</html>
