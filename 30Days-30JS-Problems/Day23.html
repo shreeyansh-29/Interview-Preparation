@@ -1,0 +1,35 @@
+<!-- Write code that enhances all arrays such that you can call the array.groupBy(fn) method on any array and 
+it will return a grouped version of the array.
+
+A grouped array is an object where each key is the output of fn(arr[i]) and each value is an array 
+containing all items in the original array with that key.
+
+The provided callback fn will accept an item in the array and return a string key.
+
+The order of each value list should be the order the items appear in the array. Any order of keys is acceptable. -->
+
+<script>
+  Array.prototype.groupBy = function (fn) {
+    let obj = {};
+    for (let key of this) {
+      let val = fn(key);
+      obj[val] = obj[val] || [];
+      obj[val].push(key);
+    }
+    return obj;
+
+    // let obj = {};
+    // for (let key of this) {
+    //   let val = fn(key);
+    //   if (!obj.hasOwnProperty(val)) {
+    //     obj[val] = [];
+    //   }
+    //   obj[val].push(key);
+    // }
+    // return obj;
+  };
+
+  /**
+   * [1,2,3].groupBy(String) // {"1":[1],"2":[2],"3":[3]}
+   */
+</script>
