@@ -1,0 +1,27 @@
+<!-- Given an object, return a valid JSON string of that object -->
+<script>
+  let jsonStringify = function (object) {
+    if (object === null || object === undefined) return object;
+
+    //Array
+    if (Array.isArray(object)) {
+      let values = object.map((obj) => jsonStringify(obj));
+      return `[${values.join(",")}]`;
+    }
+    if (typeof object === "object") {
+      let keys = Object.keys(object);
+      let keyValPairs = keys.map(
+        (key) => `"${key}": ${jsonStringify(object[key])}`
+      );
+      return `{${keyValPairs.join(",")}}`;
+    }
+    if (typeof object === "string") {
+      return `"${String(object)}"`;
+    }
+    return String(object);
+  };
+
+  // object = {"y": 1, "x": 2}
+  // object = {"a": 'str', "b": -12, "c": true, "d": null}
+  // object= {"key":{"a": 1,"b":[{},null,"Hello"]}}
+</script>

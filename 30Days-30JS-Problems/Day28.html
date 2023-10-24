@@ -22,9 +22,17 @@ empty array. Otherwise, return an array of the results of all callback calls in 
      * @param {Function} callback
      * @return {Object}
      */
+    eventMap = {};
+
     subscribe(eventName, callback) {
+      if (!this.eventMap.hasOwnProperty(eventName)) {
+        this.eventMap[eventName] = new Set();
+      }
+      this.eventMap[eventName].add(callback);
       return {
-        unsubscribe: () => {},
+        unsubscribe: () => {
+          this.eventMap[eventName].delete(callback);
+        },
       };
     }
 
@@ -33,6 +41,22 @@ empty array. Otherwise, return an array of the results of all callback calls in 
      * @param {Array} args
      * @return {Array}
      */
-    emit(eventName, args = []) {}
+    emit(eventName, args = []) {
+      const res = [];
+      (this.eventMap[eventName] ?? []).forEach((cb) => res.push(cb(...args)));
+      return res;
+    }
   }
+
+  /**
+   * const emitter = new EventEmitter();
+   *
+   * // Subscribe to the onClick event with onClickCallback
+   * function onClickCallback() { return 99 }
+   * const sub = emitter.subscribe('onClick', onClickCallback);
+   *
+   * emitter.emit('onClick'); // [99]
+   * sub.unsubscribe(); // undefined
+   * emitter.emit('onClick'); // []
+   */
 </script>

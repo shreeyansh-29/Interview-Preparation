@@ -1,0 +1,20 @@
+<!-- Nested Array Generator -->
+
+<!-- Given a multi dimensional array arr of integers, returns a generator object which yeilds integers in the same order  -->
+<!-- as inorder traversal. -->
+
+<script>
+  let inOrderTraversal = function* (arr) {
+    for (let n of arr) {
+      if (Array.isArray(n)) {
+        yield* inOrderTraversal(n);
+      } else {
+        yield n;
+      }
+    }
+  };
+
+  //   let gen = inOrderTraversal([1, [2, 3]]);
+  //   gen.next().value;
+  //   gen.next().value;
+</script>

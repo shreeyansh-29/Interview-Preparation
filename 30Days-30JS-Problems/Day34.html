@@ -1,0 +1,53 @@
+<!-- Write a function that accepts two deeply nested objects or arrays obj1 and obj2 -->
+<!-- and returns a new object representing their differences -->
+
+<script>
+  function objDiff(o1, o2) {
+    if (!isObject(o1) && !isObject(o2)) return o1 === o2 ? {} : [o1, o2]; //both primitive
+
+    if (!isObject(o1) || !isObject(o2)) return [o1, o2]; //one primitive
+
+    if (Array.isArray(o1) !== Array.isArray(o2)) return [o1, o2]; //one arr one obj
+
+    //if both array or both object
+    const diff = {};
+
+    for (let key in o1) {
+      if (o2.hasOwnProperty(key)) {
+        const res = getDiff(o1[key], o2[key]);
+        if (Object.keys(res).length > 0) diff[key] = res;
+      }
+    }
+
+    return diff;
+
+    function isObject(obj) {
+      return obj !== null && typeof obj === "object";
+    }
+  }
+
+  //   let obj1 = {},
+  //   obj2 = {"a": 1, "b": 2};
+  //   console.log(objDiff(obj1,obj2)) Output {}
+
+  //   obj1 = {
+  //     "a": 1, "v": 3, "x": [], "z": {"a": null},
+  //   }
+  //   obj2 = {
+  //     "a":2 , "v": 4, "x": [], "z": {"a": 2},
+  //   }
+  //   console.log(objDiff(obj1,obj2)) Output {"a": [1,2], "v": [3,4], "z": {"a": [null,2]}}
+
+  //   ob1 = {
+  //     "a": 5, "v": 6, "z": [1,2,4,[2,5,7]]
+  //   }
+  //   obj2 = {
+  //     "a": 5, "v": 7, "z": [1,2,3,[1]]
+  //   }
+  //   console.log(objDiff(obj1, obj2)) Output {"v": [6,7], "z": {"2": [4,3], "3": [2,1]}}
+
+  //   obj1 = {"a": {"b": 1}};
+  //   obj2 = {"a": [5]};
+
+  //   console.log(objDiff(obj1, obj2)); Output {"a": [{"b": 1}, [5]]}
+</script>
