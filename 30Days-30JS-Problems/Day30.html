@@ -1,4 +1,4 @@
-Design a Calculator class. The class should provide the mathematical operations
+<!-- Design a Calculator class. The class should provide the mathematical operations
 of addition, subtraction, multiplication, division, and exponentiation. It
 should also allow consecutive operations to be performed using method chaining.
 The Calculator class constructor should accept a number which serves as the
@@ -11,7 +11,7 @@ Calculator. divide - This method divides the result by the given number value
 and returns the updated Calculator. If the passed value is 0, an error "Division
 by zero is not allowed" should be thrown. power - This method raises the result
 to the power of the given number value and returns the updated Calculator.
-getResult - This method returns the result.
+getResult - This method returns the result. -->
 
 <script>
   class Calculator {
@@ -77,4 +77,6 @@ getResult - This method returns the result.
       return this.result;
     }
   }
+  let sol =  new Calculator(10).add(5).subtract(7).getResult();
+  console.log(sol); //8
 </script>

@@ -1,0 +1,126 @@
+<script>
+  Array.prototype.isArray = function (args) {
+    return Object.prototype.toString.call(args) === "[object Array]";
+  };
+
+  Array.prototype.push = function () {
+    let items = this,
+      len = items.length,
+      argCount = arguments.length;
+    for (let i = 0; i < argCount; i++) {
+      items[i + len] = arguments[i];
+    }
+    return len + argCount;
+  };
+
+  Array.prototype.pop = function () {
+    let arr = this,
+      len = arr.length;
+    if (len === 0) {
+      len = 0;
+      return undefined;
+    }
+    let lastEle = arr[len - 1];
+    arr.length = len - 1;
+    return lastEle;
+  };
+
+  Array.prototype.forEach = function (callback, thisArgs) {
+    if (typeof callback !== "function") {
+      throw new Error();
+    }
+    let array = this,
+      len = array.length;
+
+    for (let i = 0; i < len; i++) {
+      callback.call(thisArgs, array[i], i, array);
+    }
+  };
+
+  let numbers = [1, 2, 3, 4, 5, 6];
+  numbers.forEach(function (element, index, array) {
+    console.log(`Element at index ${index}: ${element}`);
+  });
+
+  // The thisArg parameter, short for "this argument," is an optional parameter that you can pass to
+  // many of the Array.prototype methods in JavaScript. It allows you to specify the value of this within the
+  // callback function that you provide to these methods.
+
+  // In JavaScript, the this keyword refers to the current context, which can change depending on how a function
+  // is called. When you use thisArg, you can explicitly define what the this keyword will refer to inside the callback
+  // function. This can be useful in various situations, especially when working with objects or functions that rely
+  // on the context set by this.
+
+  Array.prototype.map = function (callback, thisArgs) {
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + " is not a function");
+    }
+    let arr = this,
+      len = arr.length,
+      newArr = Array.from(len);
+    for (let i = 0; i < len; i++) {
+      if (i in arr) {
+        newArr[i] = callback.call(thisArgs, arr[i], i, arr);
+      }
+    }
+    return newArr;
+  };
+
+  var squaredNumbers = numbers.map(function (element) {
+    return element * element;
+  });
+
+  Array.prototype.filter = function (callback, thisArgs) {
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + " is not a function");
+    }
+    let arr = this,
+      len = arr.length,
+      newArr = [];
+    for (let i = 0; i < len; i++) {
+      if (i in arr) {
+        if (callback.call(thisArgs, arr[i], i, arr)) {
+          newArr.push(arr[i]);
+        }
+      }
+    }
+    return newArr;
+  };
+
+  var evenNumbers = numbers.filter(function (element) {
+    return element % 2 === 0;
+  });
+
+  Array.prototype.reduce = function (callback, initialValue) {
+    if (typeof callback !== "function") {
+      throw new Error(callback + " is not a function");
+    }
+    let arr = this,
+      len = arr.length,
+      acc = initialValue,
+      index;
+
+    if (acc === undefined) {
+      if (len === 0) {
+        throw new Error("Reduce of empty array with no initial value");
+      }
+      acc = arr[0];
+      index = 1;
+    } else {
+      index = 0;
+    }
+
+    for (; index < len; index++) {
+      if (index in arr) {
+        acc = callback.call(undefined, acc, arr[index], index, arr);
+      }
+    }
+    return acc;
+  };
+
+  var sum = numbers.reduce(function (accumulator, currentValue) {
+    return accumulator + currentValue;
+  }, 0);
+
+  console.log(sum);
+</script>

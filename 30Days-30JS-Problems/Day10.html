@@ -6,8 +6,8 @@ Every subsequent time it is called, it should return undefined. -->
 
 <script>
   var once = function (fn) {
+    let count = true;
     return function (...args) {
-      let count = true;
       if (count) {
         count = false;
         return fn(...args);
@@ -16,11 +16,11 @@ Every subsequent time it is called, it should return undefined. -->
     };
   };
 
-  /**
-   * let fn = (a,b,c) => (a + b + c)
-   * let onceFn = once(fn)
-   *
-   * onceFn(1,2,3); // 6
-   * onceFn(2,3,6); // returns undefined without calling fn
-   */
+
+  let fn = (a,b,c) => (a + b + c)
+  let onceFn = once(fn)
+
+  onceFn(1,2,3); // 6
+  onceFn(2,3,6); // returns undefined without calling fn
+   
 </script>

@@ -14,7 +14,7 @@
 
     for (let key in o1) {
       if (o2.hasOwnProperty(key)) {
-        const res = getDiff(o1[key], o2[key]);
+        const res = objDiff(o1[key], o2[key]);
         if (Object.keys(res).length > 0) diff[key] = res;
       }
     }

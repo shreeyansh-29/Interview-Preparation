@@ -13,7 +13,7 @@ const get = (obj, path) => {
   return current;
 };
 
-// console.log(get([{developer: "Tom"}, {count: [0, 1]}], "[1].count[0]"));
-// console.log(get([{developer: "Tom"}, {count: [0, 1]}], "[1].count[3]"));
+console.log(get([{developer: "Tom"}, {count: [0, 1]}], "[1].count[0]"));
+console.log(get([{developer: "Tom"}, {count: [0, 1]}], "[1].count[3]"));
 console.log(get({developer: "Software Engineer"}, "developer"));
 console.log(get({developer: {first: 'Tom', last: 'Curze'}}, "developer.last"));

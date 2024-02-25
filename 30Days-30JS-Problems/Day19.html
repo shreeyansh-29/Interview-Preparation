@@ -24,9 +24,10 @@ Please solve it without using the built-in Promise.all function. -->
           .then((val) => results.push(val))
           .catch((reason) => reject(reason));
       });
+      resolve(results);
     });
-    resolve(results);
 
+    //Another Solution
     // try {
     //   const results = await Promise.all(functions.map((fn) => fn()));
     //   return results;
@@ -35,8 +36,8 @@ Please solve it without using the built-in Promise.all function. -->
     // }
   };
 
-  /**
-   * const promise = promiseAll([() => new Promise(res => res(42))])
-   * promise.then(console.log); // [42]
-   */
+  
+  // const promise = promiseAll([() => new Promise(res => res(42))])
+  // promise.then(console.log); // [42]
+  
 </script>

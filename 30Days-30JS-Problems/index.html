@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Firebase Phone Number Auth</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="verificationcode" value="enter verification" />
+      <input type="button" value="Submit" onclick="myFunction()" />
+    </form>
+    <div id="recaptcha-container"></div>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script type="text/javascript">
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAnpbbLsQj_goOwf2sjorblk2rYdFq2uYI",
+        authDomain: "te-firebase-otp-dev.firebaseapp.com",
+        projectId: "te-firebase-otp-dev",
+        storageBucket: "te-firebase-otp-dev.appspot.com",
+        messagingSenderId: "470328286491",
+        appId: "1:470328286491:web:7c087c46b6cae2931707be",
+        measurementId: "G-6G6GQ334FE",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript">
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+        "recaptcha-container"
+      );
+      firebase
+        .auth()
+        .signInWithPhoneNumber(
+          "+91 7451942905",
+          window.recaptchaVerifier
+        )
+        .then(function (confirmationResult) {
+          window.confirmationResult = confirmationResult;
+          console.log(confirmationResult);
+        });
+      var myFunction = function () {
+        window.confirmationResult
+          .confirm(document.getElementById("verificationcode").value)
+          .then(function (result) {
+            console.log(result);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+    </script>
+  </body>
+</html>
+

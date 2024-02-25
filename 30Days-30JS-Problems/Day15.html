@@ -6,6 +6,7 @@ is called at cancelT ms.
 
 <script>
   var cancellable = function (fn, args, t) {
+    fn(...args)
     function cancelFn() {
       clearInterval(timer);
     }

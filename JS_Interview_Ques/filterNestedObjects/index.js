@@ -3,14 +3,15 @@
 
 const deepFilter = (obj, filter) => {
   //iterate the object
-  let output = {};
+  // let output = {};
   for (let key in obj) {
     const val = obj[key];
 
     //if val is also object (nested)
     if (typeof val === "object") {
       //recur
-      output = {...output, ...deepFilter(val, filter)};
+      deepFilter(val, filter)
+      // output = {...output, ...deepFilter(val, filter)};
     }
     // normal value
     else {
@@ -18,7 +19,8 @@ const deepFilter = (obj, filter) => {
       //delete it
       if (filter(val) === false) {
         delete obj[key];
-      } else output[key] = val;
+      } 
+      // else output[key] = val;
     }
 
     //if value is empty obj
@@ -27,7 +29,7 @@ const deepFilter = (obj, filter) => {
       delete obj[key];
     }
   }
-  return output;
+  return obj;
 };
 
 const obj = {

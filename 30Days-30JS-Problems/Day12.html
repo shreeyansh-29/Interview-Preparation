@@ -3,9 +3,10 @@ The returned promise should resolve with the sum of the two numbers. -->
 
 <script>
   var addTwoPromises = async function (promise1, promise2) {
-    return await Promise.all(promise1, promise2).then(
-      ([val1, val2]) => val1 + val2
-    );
+    let a = await promise1;
+    let b = await promise2;
+
+    return a + b;
   };
 
   /**

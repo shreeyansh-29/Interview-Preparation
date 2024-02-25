@@ -16,7 +16,7 @@ const outputFunction = () => {
 // }
 
 //Immediately Call
-// function debounce(fn, delay, immediate = true) {
+// function debounce(fn, delay, immediate = false) {
 //   let timer;
 //   return function (...args) {
 //     let context = this,
@@ -31,7 +31,7 @@ const outputFunction = () => {
 //       }
 //     }, delay);
 
-//     if (callNow) fn.apply(context, params);
+//     if (callNow) fn.apply(context, [...params, ...args]);
 //   };
 // }
 

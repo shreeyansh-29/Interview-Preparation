@@ -10,11 +10,11 @@ You may assume each function in the array accepts one integer as input and retur
 <script>
   var compose = function (functions) {
     return function (x) {
-        let val = x;
-        for(let key of functions.reverse()){
-            val = key(val);
-        }
-        return val;
+      let val = x;
+      for (let key of functions.reverse()) {
+        val = key(val);
+      }
+      return val;
     };
   };
 

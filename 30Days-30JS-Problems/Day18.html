@@ -12,9 +12,11 @@ The 1st call would be cancelled, the 2nd would be executed at 95ms, and the 3rd 
   var debounce = function (fn, t) {
     let timer = null;
     return function (...args) {
+      this = context,
+        params = arguments;
       clearTimeout(timer);
       timer = setTimeout(() => {
-        fn(...args);
+        fn.apply(context, [...params, ...args]);
       }, t);
     };
   };

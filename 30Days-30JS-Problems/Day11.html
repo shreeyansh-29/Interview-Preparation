@@ -23,14 +23,14 @@ factorial accepts a single integer n and returns 1 if n <= 1 or factorial(n - 1)
     };
   }
 
-  /**
-   * let callCount = 0;
-   * const memoizedFn = memoize(function (a, b) {
-   *	 callCount += 1;
-   *   return a + b;
-   * })
-   * memoizedFn(2, 3) // 5
-   * memoizedFn(2, 3) // 5
-   * console.log(callCount) // 1
-   */
+  
+  let callCount = 0;
+  const memoizedFn = memoize(function (a, b) {
+	 callCount += 1;
+    return a + b;
+  })
+  memoizedFn(2, 3) // 5
+  memoizedFn(2, 3) // 5
+  console.log(callCount) // 1
+  
 </script>

@@ -27,14 +27,14 @@
 
   let bh = new BrowserHistory();
 
-  bh.visit("A");
-  bh.visit("B");
-  bh.backward();
-  bh.backward();
-  bh.backward();
-  bh.forward();
-  bh.visit("C");
-  bh.backward();
-  bh.backward();
+  console.log(bh.visit("A"));
+  console.log(bh.visit("B"));
+  console.log(bh.backward());
+  console.log(bh.backward());
+  console.log(bh.backward());
+  console.log(bh.forward());
+  console.log(bh.visit("C"));
+  console.log(bh.backward());
+  console.log(bh.backward());
   console.log(bh.current());
 </script>

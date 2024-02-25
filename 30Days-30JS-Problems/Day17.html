@@ -57,4 +57,8 @@ count(): returns the count of un-expired keys -->
   console.log(timeLimitedCache.set(1, 42, 1000)); // false
   console.log(timeLimitedCache.get(1)); // 42
   console.log(timeLimitedCache.count()); // 1
+
+  setTimeout(() => {
+    console.log(timeLimitedCache.get(1)); //-1
+  }, 1500);
 </script>

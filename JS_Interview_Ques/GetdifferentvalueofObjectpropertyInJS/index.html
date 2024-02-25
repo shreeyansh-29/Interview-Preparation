@@ -5,6 +5,9 @@
     i: 0,
   };
 
+  // Proxy allows us to extend the existing object and return a proxy object with the getter 
+  // and setters in which we can achieve the modification of property values.
+
   obj = new Proxy(obj, {
     get: (target, property) => {
       if (property === "i") {
