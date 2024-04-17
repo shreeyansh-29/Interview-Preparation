@@ -21,20 +21,25 @@ const App = () => {
   const onChange = (event) => {
     const {value} = event.target;
     setSearchText(value);
+    getRandomData(searchText).then((val) => {
+    
+        setResult(val);
+      });
+
   };
 
-  useEffect(() => {
-    let flag = true;
-    getRandomData(searchText).then((val) => {
-      if (flag) {
-        setResult(val);
-      }
-    });
+  // useEffect(() => {
+  //   let flag = true;
+  //   getRandomData(searchText).then((val) => {
+  //     if (flag) {
+  //       setResult(val);
+  //     }
+  //   });
 
-    return () => {
-      flag = false;
-    };
-  }, [searchText]);
+  //   return () => {
+  //     flag = false;
+  //   };
+  // }, [searchText]);
 
   return (
     <div className="App">

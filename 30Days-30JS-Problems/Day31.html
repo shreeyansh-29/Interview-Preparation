@@ -24,6 +24,7 @@ For two obj to be deeply equal, they must contain the same keys, and the associa
   // let o1 = {x: 1, y: 2},
   //   o2 = {x: 1, y: 2};
   // let  o1={x: 1, y:2}, o2={y:2, x:1}
-   let  o1={x: null, y:[1,2,3]}, o2={x:null, y:["1","2","3"]}
+  let o1 = {x: null, y: [1, 2, 3]},
+    o2 = {x: null, y: ["1", "2", "3"]};
   console.log(areDeepEqual(o1, o2));
 </script>
